@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RONIX | Official Server</title>
+    
+    <!-- Бібліотеки анімацій та шрифтів -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com""")/>>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    
+    <style>
+        /* ОСНОВНІ СТИЛІ */
+        * { box-sizing: border-box; }
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #020617;
+            color: white;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* HERO СЕКЦІЯ (ВІДЕО) */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: brightness(0.3) contrast(1.2);
+            z-index: -1;
+        }
+
+        .hero-content { text-align: center; z-index: 1; }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 15px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe, #7000ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 30px rgba(0, 242, 254, 0.5));
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.5);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* МОНІТОРИНГ (СКЛЯНА КАРТКА) */
+        .main-section {
+            padding: 100px 20px;
+            background: linear-gradient(to bottom, transparent, #020617 15%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .status-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 60px 40px;
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.6);
+            transition: 0.4s;
+        }
+
+        .status-card:hover {
+            border-color: #00f2fe;
+            transform: translateY(-5px);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            border-radius: 100px;
+            background: rgba(0,0,0,0.5);
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: #475569; }
+        .online .dot { background: #00ff88; box-shadow: 0 0 15px #00ff88; }
+        .offline .dot { background: #ef4444; }
+
+        .player-num {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 9rem;
+            font-weight: 900;
+            margin: 10px 0;
+            line-height: 0.8;
+        }
+
+        /* ОПИС СЕРВЕРА */
+        .desc-text {
+            color: #94a3b8;
+            max-width: 450px;
+            margin: 20px auto;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* КНОПКА IP */
+        .ip-button {
+            background: rgba(255,255,255,0.03);
+            margin-top: 30px;
+            padding: 22px;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #00f2fe;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .ip-button:hover {
+            background: #00f2fe;
+            color: #000;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <video autoplay muted loop playsinline class="video-bg">
+            <source src="https://assets.mixkit.co" type="video/mp4">
+        </video>
+        <div class="hero-content animate__animated animate__zoomIn">
+            <h1>RONIX</h1>
+            <p style="letter-spacing: 8px; color: rgba(255,255,255,0.6);">DOMINATE THE WORLD</p>
+        </div>
+        <div class="scroll-hint" onclick="document.getElementById('monitor').scrollIntoView()">Гортай вниз ▼</div>
+    </div>
+
+    <div class="main-section" id="monitor">
+        <div class="status-card animate__animated animate__fadeInUp">
+            <div id="statusBadge" class="badge">
+                <span class="dot"></span> <span id="statusText">ОНОВЛЕННЯ...</span>
+            </div>
+
+            <div class="player-num" id="pCount">0</div>
+            <p style="color: #64748b; letter-spacing: 5px; font-weight: 600; font-size: 12px;">ГРАВЦІВ ОНЛАЙН</p>
+
+            <div class="desc-text">
+                RONIX — це не просто виживання, це твоя нова історія. Унікальні механіки, чесна гра та нескінченні можливості.
+            </div>
+
+            <div class="ip-button" id="ipBtn" onclick="copyIP()">
+                ronix.aternos.me:18034
+            </div>
+            
+            <a href="https://aternos.org" target="_blank" style="color:#475569; font-size:10px; text-decoration:none; margin-top:20px; display:block;">
+                УПРАВЛІННЯ СЕРВЕРОМ ⚙️
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const IP = 'ronix.aternos.me:18034';
+
+        async function update() {
+            try {
+                const res = await fetch(`https://api.mcstatus.io{IP}`);
+                const data = await res.json();
+                
+                const badge = document.getElementById('statusBadge');
+                const count = document.getElementById('pCount');
+                const text = document.getElementById('statusText');
+
+                if(data.online) {
+                    badge.className = 'badge online';
+                    text.innerText = "ONLINE";
+                    count.innerText = data.players.online;
+                    count.style.color = "#00ff88";
+                    count.classList.add('animate__animated', 'animate__pulse');
+                } else {
+                    badge.className = 'badge offline';
+                    text.innerText = "OFFLINE";
+                    count.innerText = "0";
+                    count.style.color = "#ef4444";
+                }
+                setTimeout(() => count.classList.remove('animate__pulse'), 1000);
+            } catch(e) { console.error("Помилка API"); }
+        }
+
+        function copyIP() {
+            navigator.clipboard.writeText(IP);
+            const btn = document.getElementById('ipBtn');
+            btn.innerText = "IP СКОПІЙОВАНО! ✅";
+            setTimeout(() => btn.innerText = IP, 2000);
+        }
+
+        update();
+        setInterval(update, 20000);
+    </script>
+</body>
+</html>
